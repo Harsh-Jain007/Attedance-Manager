@@ -1,0 +1,61 @@
+def register():
+    user={}
+    name=input('\nEnter your name: ')
+    print('WELCOME {}'.format(name.upper()).center(50))
+    uid=input('\nCreate your unique id: ')
+    while uid in UIDS :
+        print("User ID '{}' already exists.".format(uid))
+        uid=input('Create another uid: ')
+    password=input('\nCreate your password: ')
+    user['name']=name
+    uid=uid.lower()
+    user['uid']=uid
+    user['password']=password
+    user_details.append(user)
+    UIDS.append(uid)
+
+
+def sign_in():
+    detail={}
+    uid=input('\nEnter your unique id: ').lower()
+    
+    while uid not in UIDS:
+        print("User ID '{}' doesn't exists.".format(uid))
+        uid=input('Enter your unique id again: ').lower()
+    for i in range(len(user_details)):
+        detail=user_details[i]
+
+        if uid==detail['uid']:
+            break
+    
+
+    password=input('\nEnter your password: ') 
+
+    while password!=detail['password']:
+        print('Incorrect password.')
+        password=input('Re-Enter your password: ')
+
+    print('You are signed in!')
+
+i='y'
+menu=['register new user','sign in existing user']
+user_details,UIDS=[],[]
+
+while i=='y' or i=='Y':
+    
+    print('\nEnter your choice: ')
+    for i in range(len(menu)):
+        print('\t[{}] {}'.format(i+1,menu[i]))
+    choice=int(input(': '))
+
+    if choice==1:
+        register()
+    elif choice==2:
+        sign_in()
+    else:
+        print('Invalid Input.')
+
+
+    i=input('\nWant to continue?(y/n) : ')    
+
+
